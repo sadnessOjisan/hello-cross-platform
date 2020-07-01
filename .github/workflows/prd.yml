@@ -45,6 +45,8 @@ jobs:
           command: build
           args: --release --target=${{ matrix.target }}
           use-cross: true
+      - run: |
+          zip --junk-paths hello-cross-platform-${{ matrix.target }} target/${{ matrix.target }}/release/hello-cross-platform{,.exe}
       - name: Create release
         id: create_release
         uses: actions/create-release@v1.0.0
@@ -62,6 +64,6 @@ jobs:
           GITHUB_TOKEN: "${{ secrets.GITHUB_TOKEN }}"
         with:
           upload_url: "${{ steps.create_release.outputs.upload_url }}"
-          asset_path: ./target/${{ matrix.target }}
-          asset_name: ${{ matrix.target }}
+          asset_path: ./target/release/hello-cross-platform.zip
+          asset_name: hello-cross-platform.zip
           asset_content_type: application/zip
