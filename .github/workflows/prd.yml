@@ -46,7 +46,7 @@ jobs:
           args: --release --target=${{ matrix.target }}
           use-cross: true
       - name: Create release
-        id: create_release_to_sadnessOjisan_github
+        id: create_release
         uses: actions/create-release@v1.0.0
         env:
           GITHUB_TOKEN: "${{ secrets.GITHUB_TOKEN }}"
